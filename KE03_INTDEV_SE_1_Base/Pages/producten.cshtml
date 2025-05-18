@@ -1,0 +1,32 @@
+﻿@page
+@model productenModel
+@{
+    ViewData["Title"] = "Alle producten";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container mt-4">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+
+                <tr style="cursor:pointer" data-href="/Products/Details/@product.Id" onclick="location.href=this.dataset.href;">
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <span style="white-space: nowrap">
+                <td>€&nbsp;@product.Price.ToString("N2").Replace(",00", ",-")</td> <!-- Formats price as currency -->
+                </span>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

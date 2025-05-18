@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace KE03_INTDEV_SE_1_Base.Pages
 {
-    public class Index1Model : PageModel
+    public class OrderviewModel : PageModel
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IProductRepository _productRepository;
@@ -18,7 +18,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         public IList<Part> Parts { get; private set; }
         public List<string> productlist { get; private set; }
 
-        public Index1Model(IOrderRepository orderRepository)
+        public OrderviewModel(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
             Orders = new List<Order>();
