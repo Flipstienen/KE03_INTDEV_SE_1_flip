@@ -55,6 +55,19 @@ namespace DataAccessLayer
             };
             context.Parts.AddRange(parts);
 
+            orders[0].Products.Add(products[2]);
+            orders[1].Products.Add(products[2]);
+            orders[2].Products.Add(products[0]);
+            orders[3].Products.Add(products[1]);
+            orders[0].Products.Add(products[1]);
+            products[0].Parts.Add(parts[0]);
+            products[1].Parts.Add(parts[2]);
+            products[1].Parts.Add(parts[3]);
+            products[2].Parts.Add(parts[0]);
+            products[2].Parts.Add(parts[1]);
+            products[0].Parts.Add(parts[1]);
+
+
             context.SaveChanges();
 
             context.Database.EnsureCreated();

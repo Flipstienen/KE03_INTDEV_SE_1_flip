@@ -29,13 +29,15 @@
         <tr>
             <th>Klant</th>
             <th>Aantal Orders</th>
+            <th> is hij nog actief</th>
         </tr>
     </thead>
     @foreach (var c in Model.Customers)
     {        
         <tr>
             <td>@Html.DisplayName(c.Name)</td>
-            <td>@Html.DisplayName(c.Orders.Count.ToString())</td>           
+            <td>@Html.DisplayName(c.Orders.Count.ToString())</td>        
+            <td>@Html.DisplayName(c.Active.ToString())</td>
         </tr>
     }
 </table>

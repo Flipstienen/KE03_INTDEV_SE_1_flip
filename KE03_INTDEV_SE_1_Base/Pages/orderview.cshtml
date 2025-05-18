@@ -1,0 +1,49 @@
+﻿@page
+@model Index1Model
+@{
+	ViewData["Title"] = "Order";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>bestel ID</th>
+			<th>bestel datum</th>
+			<th>klant Name</th>
+			<th>bestelde producten</th>
+		</tr>
+</thead>
+	@foreach (var order in Model.Orders)
+	{
+		<tr>
+			<td>@Html.DisplayName(order.Id.ToString())</td>
+			<td>@Html.DisplayName(order.OrderDate.ToString())</td>
+			<td>@Html.DisplayName(order.Customer.Name.ToString())</td>
+			<td>
+				@foreach (var product in order.Products)
+				{
+					@Html.DisplayName(product.Name.ToString())
+					<br />
+				}
+				
+			</td>
+		</tr>
+	}
+
+</table>
+
+<script>
+	@foreach (var order in Model.Orders)
+	{
+		@Html.Raw("console.log('Order ID: " + order.Id + "');")
+		@Html.Raw("console.log('Order Date: " + order.OrderDate.ToString("yyyy-MM-dd") + "');")
+		@Html.Raw("console.log('Customer Name: " + order.Customer.Name + "');")
+		foreach (var product in order.Products)
+		{
+			@Html.Raw("console.log('Product Name: " + product.Name + "');")
+		}
+		@Html.Raw("console.log(' "+order.Products.ToArray() +"');")
+	}
+</script>

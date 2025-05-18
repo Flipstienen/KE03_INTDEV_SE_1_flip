@@ -1,6 +1,7 @@
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace KE03_INTDEV_SE_1_Base.Pages
@@ -10,9 +11,10 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly ICustomerRepository _customerRepository;
 
-        public IList<Customer> Customers { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, ICustomerRepository customerRepository)
+        public IList<Customer> Customers { get; private set; }
+
+        public IndexModel(ILogger<IndexModel> logger, ICustomerRepository customerRepository, IOrderRepository orderRepository, IProductRepository productRepository, IPartRepository partRepository)
         {
             _logger = logger;
             _customerRepository = customerRepository;
@@ -20,8 +22,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         }
 
         public void OnGet()
-        {            
-            Customers = _customerRepository.GetAllCustomers().ToList();                            
+        {
+            Customers = _customerRepository.GetAllCustomers().ToList();
             _logger.LogInformation($"getting all {Customers.Count} customers");
         }
     }

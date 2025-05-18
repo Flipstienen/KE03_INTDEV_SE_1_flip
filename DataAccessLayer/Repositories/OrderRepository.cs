@@ -32,7 +32,7 @@ namespace DataAccessLayer.Repositories
 
         public IEnumerable<Order> GetAllOrders()
         {
-            return _context.Orders.Include(o => o.Customer);
+            return _context.Orders.Include(o => o.Customer).Include(o => o.Products).ThenInclude(p => p.Parts);
         }
 
         public Order? GetOrderById(int id)
