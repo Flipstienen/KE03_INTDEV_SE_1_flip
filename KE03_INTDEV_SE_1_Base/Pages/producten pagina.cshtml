@@ -3,13 +3,8 @@
 @{
 	ViewData["Title"] = Model.Product.Name.ToString();
 }
-
-<div id="adblock-warning" style="display:none; color: red; font-weight: bold;">
-    ⚠️ Please consider disabling your ad blocker to support us!
-</div>
-
 <h1>@ViewData["Title"]</h1>
-<img src="@Model.Product.ImageUrl" alt="afbeelding van @ViewData["Title"]"/>
+<img src="@Model.imgSrc" alt="afbeelding van @ViewData["Title"]" />
 
 <form method="post" asp-page-handler="AddToCart">
     @Html.AntiForgeryToken()
@@ -18,33 +13,30 @@
     <label for="quantity">Aantal:</label>
     <input type="number" id="quantity" name="quantity" min="1" value="1" required />
 
-    <button type="submit" class="btn btn-primary" onclick="Feedback()">Voeg toe aan winkelmandje</button>
+    <button type="submit" class="btn btn-primary">Voeg toe aan winkelmandje</button>
 </form> 
 
-<script>
-    window.addEventListener('DOMContentLoaded', function () {
-        const adTest = document.createElement('div');
-        adTest.innerHTML = '&nbsp;';
-        adTest.className = 'adsbox'; // Commonly blocked class name
-        adTest.style.position = 'absolute';
-        adTest.style.height = '1px';
-        adTest.style.width = '1px';
-        adTest.style.top = '-1000px';
+@if (Model.showFeedback)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var feedback = document.createElement("div");
+            feedback.innerHTML = "Product toegevoegd aan winkelmandje!";
+            feedback.style.position = "fixed";
+            feedback.style.top = "10px";
+            feedback.style.right = "10px";
+            feedback.style.backgroundColor = "#28a745";
+            feedback.style.color = "white";
+            feedback.style.padding = "10px";
+            feedback.style.borderRadius = "5px";
+            feedback.style.zIndex = "1000";
+            document.body.appendChild(feedback);
 
-        document.body.appendChild(adTest);
-
-        window.setTimeout(function () {
-            if (adTest.offsetHeight === 0) {
-                // Ad blocker likely active
-                alert("We've detected you're using an ad blocker. Please consider disabling it for this site.");
-                // OR show a custom banner/message instead
-                document.getElementById('adblock-warning').style.display = 'block';
-            }
-            adTest.remove();
-        }, 100);
-    });
-
-    function Feedback() {
-        alert("Product toegevoegd aan winkelmandje!");
-    }
-</script>
+            setTimeout(function () {
+                if (document.body.contains(feedback)) {
+                    document.body.removeChild(feedback);
+                }
+            }, 1500);
+        });
+    </script>
+}

@@ -29,6 +29,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
+				<th>Image</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
@@ -39,11 +40,13 @@
             {
 
             <tr style="cursor:pointer" data-href="/producten pagina/@product.Id" onclick="location.href=this.dataset.href;" >
+			    <td><img src="data:image/jpeg;base64,@Convert.ToBase64String(product.Image)" alt="afbeelding van @product.Name" width="200px" /></td>
                 <td>@product.Name</td>
                 <td>@product.Description</td>
                 <span style="white-space: nowrap">
                 <td>€&nbsp;@product.Price.ToString("N2").Replace(",00", ",-")</td> <!-- Formats price as currency -->
                 </span>
+                <td><button class="btn-primary">Bekijk het item =></button></td>
             </tr>
             }
         </tbody>

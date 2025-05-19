@@ -5,7 +5,7 @@
 }
 <div>
     <center>
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     Filter
@@ -16,13 +16,13 @@
 				@foreach (var filter in Model.filters)
 				{
 					<tr>
-						<td>
+						<td align="center">
                             <a href="/producten?selectedFilter=@filter">
-							    @filter
+							    <button class="btn-primary">@filter</button>
 							</a>
 						</td>
 					</tr>
-				})
+				}
             </tbody>
         </table>
     </center>

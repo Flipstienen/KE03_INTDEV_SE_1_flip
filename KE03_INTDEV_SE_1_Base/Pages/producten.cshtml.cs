@@ -12,6 +12,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         public List<Product> Products { get; set; }
         public List<string> Filters { get; set; }
 
+        public string imgSrc { get; set; }
         public productenModel(IProductRepository productRepository)
         {
             _productRepository = productRepository;

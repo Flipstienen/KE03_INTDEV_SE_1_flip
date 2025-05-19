@@ -1,6 +1,7 @@
 using DataAccessLayer;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
+using DataAccessLayer.Repositories;
 using KE03_INTDEV_SE_1_Base.Pages.helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,7 +13,9 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         private readonly IProductRepository _productrepository;
 
         public Product Product { get; set; }
+        public string imgSrc { get; set; }
 
+        public bool showFeedback { get; set; } = false;
         public DetailsModel(IProductRepository productRepository)
         {
             _productrepository = productRepository;
@@ -27,13 +30,15 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             {
                 return NotFound();
             }
-
+            imgSrc = $"data:image/jpeg;base64,{Convert.ToBase64String(Product.Image)}";
             return Page();
         }
     
     
         public IActionResult OnPostAddToCart(int productId, int quantity)
         {
+            Product = _productrepository.GetProductById(productId);
+            showFeedback = false;
             var product = _productrepository.GetProductById(productId);
 
             if (product == null)
@@ -52,7 +57,9 @@ namespace KE03_INTDEV_SE_1_Base.Pages
                 cart.Add(new CartItem {productId = product.Id, productName = product.Name, price = product.Price, quantity = quantity });
             }
             HttpContext.Session.SetObjectAsJson("cart", cart);
-            return RedirectToPage("/winkelmandje");
+            imgSrc = $"data:image/jpeg;base64,{Convert.ToBase64String(product.Image)}";
+            showFeedback = true;
+            return Page();
         }
     }
 }

@@ -47,7 +47,16 @@ button.accept-policy {
   line-height: 60px;
 }
 
+.navbar-nav {
+    display: flex;
+    align-items: flex-end;
+    height: 60px;
+}
 
+
+.nav-item{
+    margin-bottom: 0;
+}
 .nav-item.dropdown {
     position: relative;
 }
@@ -66,3 +75,4 @@ button.accept-policy {
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
 }
+

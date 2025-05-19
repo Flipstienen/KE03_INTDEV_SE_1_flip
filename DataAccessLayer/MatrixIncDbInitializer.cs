@@ -40,9 +40,10 @@ namespace DataAccessLayer
 
             var products = new Product[]
             {
-                new Product { Name = "Nebuchadnezzar", Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen", Price = 10000.00m, characteristic="Voertuigen", ImageUrl="https://i.pinimg.com/736x/ea/3c/b2/ea3cb20e004ec6874154bee0e9c773ce.jpg" },
-                new Product { Name = "Jack-in Chair", Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort", Price = 500.50m, characteristic="Zettels", ImageUrl="https://th.bing.com/th/id/R.b424262828c7a36873efe9a01e6ba3ce?rik=PwHlu9wNZcRwuA&riu=http%3a%2f%2fwww.scifimoviezone.com%2fimagematrix%2fmatrix99143.jpg&ehk=BcfqVgGxpsJsmxTFpIw35cXqPFBdQTrjGe3Q8ZffvoE%3d&risl=&pid=ImgRaw&r=0"},
-                new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m, characteristic="Bom", ImageUrl="https://th.bing.com/th/id/R.059c619ec5a806dea26468be9cdbbca3?rik=yPffaXLuvKZNIQ&riu=http%3a%2f%2fwww.ausairpower.net%2fXIMG%2fhpmbomb.gif&ehk=rtde4ziYhrx9r8mtz%2fnigmLvxmzpOUAZxSi9ZoGLb9U%3d&risl=&pid=ImgRaw&r=0" }
+
+                new Product { Name = "Nebuchadnezzar", Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen", Price = 10000.00m, characteristic = "Voertuigen", Image = System.IO.File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), @"..\", "DataAccessLayer", "Images_For_Database", "Hoverbike.jpg")) },
+                new Product { Name = "Jack-in Chair", Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort", Price = 500.50m, characteristic="Zettels", Image = System.IO.File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), @"..\", "DataAccessLayer", "Images_For_Database", "jack-in chair.jpeg")) },
+                new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m, characteristic="Bom", Image= System.IO.File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), @"..\", "DataAccessLayer", "Images_For_Database", "emp.jpeg")) }
             };
             context.Products.AddRange(products);
 
