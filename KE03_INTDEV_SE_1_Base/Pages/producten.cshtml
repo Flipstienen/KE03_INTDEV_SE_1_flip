@@ -6,6 +6,25 @@
 
 <h1>@ViewData["Title"]</h1>
 
+<button class="btn btn-primary" onclick="ToggleFilters()">Filters =></button>
+<div id="filters" hidden="hidden"> 
+    <h5>Filters</h5>
+    <table>
+        <tbody>
+			@foreach (var filter in Model.Filters)
+			{
+				<tr>
+					<td>
+						<a href="/producten?selectedFilter=@filter">
+							@filter
+						</a>
+					</td>
+				</tr>
+			}
+        </tbody>
+    </table>
+</div>
+
 <div class="container mt-4">
     <table class="table table-bordered">
         <thead>
@@ -19,7 +38,7 @@
             @foreach (var product in Model.Products)
             {
 
-                <tr style="cursor:pointer" data-href="/Products/Details/@product.Id" onclick="location.href=this.dataset.href;">
+            <tr style="cursor:pointer" data-href="/producten pagina/@product.Id" onclick="location.href=this.dataset.href;" >
                 <td>@product.Name</td>
                 <td>@product.Description</td>
                 <span style="white-space: nowrap">
@@ -30,3 +49,14 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    function ToggleFilters(){
+		container = document.getElementById("filters");
+		if (container.hidden) {
+			container.hidden = false;
+		} else {
+			container.hidden = true;
+		}
+	}
+</script>

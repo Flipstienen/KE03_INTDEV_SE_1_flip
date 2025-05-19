@@ -10,14 +10,24 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         private readonly IProductRepository _productRepository;
 
         public List<Product> Products { get; set; }
+        public List<string> Filters { get; set; }
+
         public productenModel(IProductRepository productRepository)
         {
             _productRepository = productRepository;
             Products = new List<Product>();
+            Filters = new List<string>();
         }
-        public void OnGet()
+        public void OnGet(string selectedFilter)
         {
-            Products = _productRepository.GetAllProducts().ToList();
+            Filters = _productRepository.GetAllCharasteristics().ToList();
+            Filters.Add("geen filters");
+            Products = _productRepository.GetAllProducts().Where(p => p.characteristic == selectedFilter).ToList();
+
+            if (selectedFilter == "geen filters")
+            {
+                Products = _productRepository.GetAllProducts().ToList();
+            }
         }
     }
 }

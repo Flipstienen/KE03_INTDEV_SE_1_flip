@@ -1,0 +1,29 @@
+﻿@page
+@model Filtermodel
+@{
+    ViewData["Title"] = "Home page";
+}
+<div>
+    <center>
+        <table>
+            <thead>
+                <tr>
+                    Filter
+                </tr>
+            </thead>
+
+            <tbody>
+				@foreach (var filter in Model.filters)
+				{
+					<tr>
+						<td>
+                            <a href="/producten?selectedFilter=@filter">
+							    @filter
+							</a>
+						</td>
+					</tr>
+				})
+            </tbody>
+        </table>
+    </center>
+</div>

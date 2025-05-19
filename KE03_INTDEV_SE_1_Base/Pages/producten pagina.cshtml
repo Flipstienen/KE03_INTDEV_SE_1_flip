@@ -1,4 +1,50 @@
-﻿@page
-@model KE03_INTDEV_SE_1_Base.Pages.DetailsModel
+﻿@page "{id:int}"
+@model DetailsModel
 @{
+	ViewData["Title"] = Model.Product.Name.ToString();
 }
+
+<div id="adblock-warning" style="display:none; color: red; font-weight: bold;">
+    ⚠️ Please consider disabling your ad blocker to support us!
+</div>
+
+<h1>@ViewData["Title"]</h1>
+<img src="@Model.Product.ImageUrl" alt="afbeelding van @ViewData["Title"]"/>
+
+<form method="post" asp-page-handler="AddToCart">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="productId" value="@Model.Product.Id" />
+    
+    <label for="quantity">Aantal:</label>
+    <input type="number" id="quantity" name="quantity" min="1" value="1" required />
+
+    <button type="submit" class="btn btn-primary" onclick="Feedback()">Voeg toe aan winkelmandje</button>
+</form> 
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        const adTest = document.createElement('div');
+        adTest.innerHTML = '&nbsp;';
+        adTest.className = 'adsbox'; // Commonly blocked class name
+        adTest.style.position = 'absolute';
+        adTest.style.height = '1px';
+        adTest.style.width = '1px';
+        adTest.style.top = '-1000px';
+
+        document.body.appendChild(adTest);
+
+        window.setTimeout(function () {
+            if (adTest.offsetHeight === 0) {
+                // Ad blocker likely active
+                alert("We've detected you're using an ad blocker. Please consider disabling it for this site.");
+                // OR show a custom banner/message instead
+                document.getElementById('adblock-warning').style.display = 'block';
+            }
+            adTest.remove();
+        }, 100);
+    });
+
+    function Feedback() {
+        alert("Product toegevoegd aan winkelmandje!");
+    }
+</script>

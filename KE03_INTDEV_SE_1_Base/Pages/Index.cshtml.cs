@@ -23,6 +23,10 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
         public void OnGet()
         {
+            HttpContext.Session.SetString("test", "hello");
+            var value = HttpContext.Session.GetString("test");
+            Console.WriteLine("SESSION VALUE: " + value); // Should print "hello"
+
             Customers = _customerRepository.GetAllCustomers().ToList();
             _logger.LogInformation($"getting all {Customers.Count} customers");
         }

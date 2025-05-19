@@ -21,8 +21,8 @@ namespace KE03_INTDEV_SE_1_Base
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<IPartRepository, PartRepository>();
-
-            // Add services to the container.
+            builder.Services.AddSession();
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
@@ -33,6 +33,7 @@ namespace KE03_INTDEV_SE_1_Base
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+
             }
 
             using (var scope = app.Services.CreateScope())
@@ -47,8 +48,8 @@ namespace KE03_INTDEV_SE_1_Base
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.MapRazorPages();

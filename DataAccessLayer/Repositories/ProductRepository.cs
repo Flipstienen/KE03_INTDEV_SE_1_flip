@@ -34,6 +34,10 @@ namespace DataAccessLayer.Repositories
             return _context.Products.Include(p => p.Parts);
         }
 
+        public IEnumerable<string> GetAllCharasteristics()
+        {
+            return _context.Products.Select(p => p.characteristic);
+        }
         public Product? GetProductById(int id)
         {
             return _context.Products.Include(p => p.Parts).FirstOrDefault(p => p.Id == id);

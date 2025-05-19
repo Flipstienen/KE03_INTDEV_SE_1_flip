@@ -1,7 +1,55 @@
 ﻿@page
-@model IndexModel
+@model winkelmandjeModel
 @{
     ViewData["Title"] = "Winkelmandje";
 }
 
 <h1>@ViewData["Title"]</h1>
+
+<div>
+	<p>Hieronder staan de producten in uw winkelmandje:</p</div>
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Prijs</th>
+      <th>Aantal</th>
+      <th>Acties</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in Model.products)
+    {
+      <tr>
+        <td>@item.productName</td>
+        <td>@item.price.ToString("C").Replace(",00",",-")</td>
+        <td>
+          <form method="post" asp-page-handler="Decrease" style="display:inline;">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="productName" value="@item.productName" />
+            <button type="submit">-</button>
+          </form>
+          @item.quantity
+          <form method="post" asp-page-handler="Increase" style="display:inline;">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="productName" value="@item.productName" />
+            <button type="submit">+</button>
+          </form>
+        </td>
+        <td>
+          <form method="post" asp-page-handler="Remove">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="productName" value="@item.productName" />
+            <button type="submit">🗑 Remove</button>
+          </form>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+@if (ViewData["Message"] != null)
+{
+	<div>
+		<p>@ViewData["Message"]</p>
+	</div>
+}

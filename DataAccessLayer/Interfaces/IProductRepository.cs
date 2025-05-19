@@ -11,6 +11,8 @@ namespace DataAccessLayer.Interfaces
     {
         public IEnumerable<Product> GetAllProducts();
 
+        public IEnumerable<string> GetAllCharasteristics();
+
         public Product? GetProductById(int id);
 
         public void AddProduct(Product product);

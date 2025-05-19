@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/KE03_INTDEV_SE_1_Base.styles.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -26,13 +27,18 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-page="/producten">Alle Producten</a>
+							<a class="nav-link text-dark" asp-area="" asp-page="/filter">Alle Producten</a>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/winkelmandje"><img src="/images/winkelmandje.jpg" alt="betellen" width="30px" /></a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/orderview" >bestellingen bekijken</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown"><i class="bi bi-person-circle fs-3"></i></a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" asp-page="/notImplemented">instellingen <i class="bi bi-gear-fill"></i></a></li>
+                                <li><a class="dropdown-item" asp-page="/orderview">BestelHistorie</a></li>
+                                <li><a class="dropdown-item" asp-page="/notImplemented">log uit</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -54,6 +60,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
