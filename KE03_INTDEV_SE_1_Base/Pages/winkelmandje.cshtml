@@ -1,5 +1,6 @@
 ﻿@page
 @model winkelmandjeModel
+@using System.Text.Json
 @{
     ViewData["Title"] = "Winkelmandje";
 }
@@ -7,7 +8,8 @@
 <h1>@ViewData["Title"]</h1>
 
 <div>
-	<p>Hieronder staan de producten in uw winkelmandje:</p</div>
+	<p>Hieronder staan de producten in uw winkelmandje:</p
+</div>
 <table>
   <thead>
     <tr>
@@ -53,3 +55,35 @@
 		<p>@ViewData["Message"]</p>
 	</div>
 }
+
+<button onclick="CartCheck()"> afrekenen</button>
+
+<script>
+    function CartCheck(){
+        cart = @Html.Raw(Json.Serialize(Model.products))
+        if (cart.length == 0)
+        {
+            var feedback = document.createElement("div");
+            feedback.innerHTML = "Je winkelmandje is leeg, voeg eerst een product toe!";
+            feedback.style.position = "fixed";
+            feedback.style.top = "10px";
+            feedback.style.right = "10px";
+            feedback.style.backgroundColor = "#dc3545";
+            feedback.style.color = "white";
+            feedback.style.padding = "10px";
+            feedback.style.borderRadius = "5px";
+            feedback.style.zIndex = "1000";
+            document.body.appendChild(feedback);
+
+            setTimeout(function () {
+                if (document.body.contains(feedback)) 
+                {
+                    document.body.removeChild(feedback);
+                }
+            }, 1500);
+        } 
+        else {
+            window.location.href = "/betaalstappen/stap1gegevens";
+        }
+    }
+</script>
