@@ -11,6 +11,7 @@ namespace DataAccessLayer.Interfaces
     {
         public IEnumerable<Order> GetAllOrders();
 
+        public void AddOrder(DateTime date, int customerId)
         public Order? GetOrderById(int id);
 
         public void AddOrder(Order order);

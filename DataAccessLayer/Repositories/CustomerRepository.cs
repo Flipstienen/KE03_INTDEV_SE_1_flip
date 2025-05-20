@@ -24,6 +24,10 @@ namespace DataAccessLayer.Repositories
             _context.SaveChanges();
         }
 
+        public Customer? GetCustomerByName(string name)
+        {
+            return _context.Customers.Include(c => c.Orders).FirstOrDefault(c => c.Name == name);
+        }
         public void DeleteCustomer(Customer customer)
         {
             _context.Customers.Remove(customer);

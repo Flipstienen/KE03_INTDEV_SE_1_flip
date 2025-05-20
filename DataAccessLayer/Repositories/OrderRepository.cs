@@ -24,6 +24,17 @@ namespace DataAccessLayer.Repositories
             _context.SaveChanges();
         }
 
+        public void AddOrder(DateTime date, int customerId)
+        {
+            Order order = new Order
+            {
+                OrderDate = date,
+                CustomerId = customerId
+            };
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+        }
+
         public void DeleteOrder(Order order)
         {
             _context.Orders.Remove(order);

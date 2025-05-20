@@ -1,4 +1,44 @@
-﻿@page
-@model KE03_INTDEV_SE_1_Base.Pages.Betaalstappen.stap1_gegevensModel
-@{
-}
+﻿@page  
+@model Stap1gegevensModel  
+@{  
+   ViewData["Title"] = "Stap 1 gegevens invoeren";  
+}  
+<div>  
+<form id="myForm" method="post" asp-page-handler="Autentication">  
+   <h3> Naam: <input name="Naam" /> </h3>  
+   <h3> Adres: <input name="Adres"/> </h3>  
+   <h3> <button type="submit" class="btn btn-primary btn-lg float-end">volgende stap</button></h3>  
+</form>  
+</div>  
+
+<script>  
+   document.addEventListener("DOMContentLoaded", function () {  
+       var form = document.getElementById("myForm");  
+       form.addEventListener("submit", function (event) {  
+           event.preventDefault();  
+           var naam = form.elements["Naam"].value;  
+           var adres = form.elements["Adres"].value;  
+           if (naam === "" || adres === "") {  
+               var feedback = document.createElement("div");  
+               feedback.innerHTML = "Vul alle velden in!";  
+               feedback.style.position = "fixed";  
+               feedback.style.top = "10px";  
+               feedback.style.right = "10px";  
+               feedback.style.backgroundColor = "#dc3545";  
+               feedback.style.color = "white";  
+               feedback.style.padding = "10px";  
+               feedback.style.borderRadius = "5px";  
+               feedback.style.zIndex = "1000";  
+               document.body.appendChild(feedback);  
+
+               setTimeout(function () {  
+                   if (document.body.contains(feedback)) {  
+                       document.body.removeChild(feedback);  
+                   }  
+               }, 1500);  
+               return;  
+           }  
+           form.submit();  
+       });  
+   });  
+</script>

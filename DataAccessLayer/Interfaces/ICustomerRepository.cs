@@ -13,6 +13,8 @@ namespace DataAccessLayer.Interfaces
 
         public Customer? GetCustomerById(int id);
 
+        public Customer? GetCustomerByName(string name);
+
         public void AddCustomer(Customer customer);
 
         public void UpdateCustomer(Customer customer);

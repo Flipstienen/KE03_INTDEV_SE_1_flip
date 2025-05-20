@@ -17,19 +17,19 @@
 
 <button class="btn btn-primary" onclick="ToggleFilters()">Filters</button>
 <div id="filters" style="display: none"> 
-    <h5>Filters</h5>
-    <table>
+    <table class="table">
         <tbody>
-			@foreach (var filter in Model.Filters)
-			{
-				<tr>
-					<td>
-						<a href="/producten?selectedFilter=@filter">
-							@filter
-						</a>
-					</td>
-				</tr>
-			}
+            @foreach (var row in Model.Filters.Select((filter, index) => new { filter, index }).GroupBy(x => x.index/ 8))
+            {
+                <tr>
+                    @foreach(var filters in row)
+                    {
+                        <td>
+                            <button class="btn btn-primary" onclick="window.location.href='/producten?selectedFilter=@filters.filter'">@filters.filter</button>
+                        </td>
+					}
+                </tr>
+            }
         </tbody>
     </table>
 </div>
@@ -53,7 +53,7 @@
                 <td>@product.Name</td>
                 <td>@product.Description</td>
                 <span style="white-space: nowrap">
-                <td>€&nbsp;@product.Price.ToString("N2").Replace(",00", ",-")</td> <!-- Formats price as currency -->
+                <td>€&nbsp;@product.Price.ToString("N2").Replace(",00", ",-")</td>
                 </span>
                 <td><button class="btn-primary">Bekijk het item =></button></td>
             </tr>
@@ -76,5 +76,4 @@
 			container.style.display = "none";
 		}
 	}
-
 </script>

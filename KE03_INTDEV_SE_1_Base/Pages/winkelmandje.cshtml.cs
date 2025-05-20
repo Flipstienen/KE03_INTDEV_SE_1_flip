@@ -9,11 +9,18 @@ namespace KE03_INTDEV_SE_1_Base.Pages
     public class winkelmandjeModel : PageModel
     {
         public List<CartItem> products { get; private set; }
+        public decimal totalPrice { get; private set; } = 0;
         public void OnGet()
         {
             Console.WriteLine(HttpContext.Session.GetString("cart"));
             
             products = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart") ?? new List<CartItem>();
+
+            foreach (var product in products)
+            {
+                totalPrice += product.price * product.quantity;
+            }
+            totalPrice.ToString().Replace(",00", "-");
 
             if (products.Count == 0)
             {

@@ -9,6 +9,16 @@ namespace DataAccessLayer.Models
 {
     public class Customer
     {
+        public Customer()
+        {
+        }
+
+        public Customer(string name, string address, bool active)
+        {
+            Name = name;
+            Address = address;
+            Active = active;
+        }
         [Key]
         [Required]
         public int Id { get; set; }

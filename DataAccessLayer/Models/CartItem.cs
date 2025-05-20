@@ -1,6 +1,4 @@
-﻿using DataAccessLayer.Models;
-
-namespace DataAccessLayer.Models
+﻿namespace DataAccessLayer.Models
 {
     public class CartItem
     {

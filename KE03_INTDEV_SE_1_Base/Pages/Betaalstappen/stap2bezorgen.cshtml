@@ -1,0 +1,25 @@
+﻿@page
+@model Stap2bezorgenModel
+<link rel="stylesheet" href="~/css/style.css" />
+@{
+    ViewData["Title"] = "Stap 2 bezorgoptie";
+}
+<div>
+    <h1>@ViewData["Title"]</h1>
+    <h2>Stap 2: Kies een bezorgoptie</h2>
+    <form id="myFrom" method="post" asp-page-handler="Bestel">
+        <div class="circle-choice-group">
+            <label class="circle-option">
+                <input type="radio" name="bezorgoptie" value="thuis" />
+                <span>Thuisbezorgen</span>
+                <p>Thuisbezorging = 5,- euro</p>
+            </label>
+            <label class="circle-option">
+                <input type="radio" name="bezorgoptie" value="afhalen" />
+                <span>Afhalen</span>
+                <p>Afhalen = 0,- euro</p>
+            </label>
+        </div>
+        <h3> <button type="submit" class="btn btn-primary btn-lg float-end">betaal</button></h3>
+    </form>
+</div>
