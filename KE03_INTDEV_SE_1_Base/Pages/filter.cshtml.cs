@@ -3,6 +3,8 @@ using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace KE03_INTDEV_SE_1_Base.Pages
 {
@@ -10,7 +12,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
     {
         private readonly IProductRepository _productRepository;
 
-        public IList<string> filters { get; private set; }
+        public List<string> filters { get; private set; }
 
         public Filtermodel(IProductRepository productRepository)
         {

@@ -1,13 +1,13 @@
 ﻿@page
 @model NotFoundModel
 @{
-	ViewData["Title"] = "Niet gevonden"; 
+	ViewData["Title"] = "niet gevonden";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<button class="btn btn-primary">Filters</button>
-<div id="filters" style="display: block">
+<button class="btn btn-sec">Filters</button>
+<div id="filters">
     <table class="table">
         <tbody>
             @foreach (var row in Model.Filters.Select((filter, index) => new { filter, index }).GroupBy(x => x.index / 8))
@@ -16,14 +16,11 @@
                     @foreach (var filters in row)
                     {
                         <td>
-                            <button class="btn btn-primary" onclick="window.location.href='/producten?selectedFilter=@filters.filter'">@filters.filter</button>
+                            <button class="btn btn-secondary" onclick="window.location.href='/producten?selectedFilter=@filters.filter'">@filters.filter</button>
                         </td>
                     }
                 </tr>
             }
         </tbody>
     </table>
-</div>
-<div>
-    <h3>Kies een kenmerk/filter of ga terug naar home.</h3>
 </div>

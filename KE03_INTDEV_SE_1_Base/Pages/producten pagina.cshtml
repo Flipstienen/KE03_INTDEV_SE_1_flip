@@ -13,7 +13,7 @@
     <label for="quantity">Aantal:</label>
     <input type="number" id="quantity" name="quantity" min="1" value="1" required />
 
-    <button type="submit" class="btn btn-primary">Voeg toe aan winkelmandje</button>
+    <button type="submit" class="btn btn-secondary">Voeg toe aan winkelmandje</button>
 </form> 
 
 @if (Model.showFeedback)
@@ -40,3 +40,14 @@
         });
     </script>
 }
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const quantityInput = document.getElementById("quantity");
+        quantityInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Stop Enter from submitting the form
+            }
+        });
+    });
+</script>

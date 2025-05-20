@@ -1,28 +1,31 @@
 ﻿@page
 @model Filtermodel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Filteren";
 }
 <div>
     <center>
         <table class="table">
             <thead>
                 <tr>
-                    Filter
-                </tr>
+                    <th colspan="8" style="border-bottom: 2px solid #212529;">
+                        Filter
+                    </th>
+				</tr>
             </thead>
 
             <tbody>
-				@foreach (var filter in Model.filters)
-				{
-					<tr>
-						<td align="center">
-                            <a href="/producten?selectedFilter=@filter">
-							    <button class="btn-primary">@filter</button>
-							</a>
-						</td>
-					</tr>
-				}
+                @foreach (var row in Model.filters.Select((filter, index) => new { filter, index }).GroupBy(x => x.index / 8))
+                {
+                    <tr>
+                        @foreach (var filters in row)
+                        {
+                            <td class ="col-md-3 col-6 mb-2">
+                                <button class="btn btn-secondary w-100" onclick="window.location.href='/producten?selectedFilter=@filters.filter'">@filters.filter</button>
+                            </td>
+                        }
+                    </tr>
+                }
             </tbody>
         </table>
     </center>

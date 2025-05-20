@@ -41,7 +41,6 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             {
                 Products = _productRepository.GetAllProducts().Where(p => p.characteristic == selectedFilter).ToList();
             }
-
             return Page();
         }
     }

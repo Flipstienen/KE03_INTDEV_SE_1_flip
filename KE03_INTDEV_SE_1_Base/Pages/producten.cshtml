@@ -15,7 +15,7 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<button class="btn btn-primary" onclick="ToggleFilters()">Filters</button>
+<button class="btn btn-secondary" onclick="ToggleFilters()">Filters</button>
 <div id="filters" style="display: none"> 
     <table class="table">
         <tbody>
@@ -25,7 +25,7 @@
                     @foreach(var filters in row)
                     {
                         <td>
-                            <button class="btn btn-primary" onclick="window.location.href='/producten?selectedFilter=@filters.filter'">@filters.filter</button>
+                            <button class="btn btn-secondary w-100" onclick="window.location.href='/producten?selectedFilter=@filters.filter'">@filters.filter</button>
                         </td>
 					}
                 </tr>
@@ -55,7 +55,7 @@
                 <span style="white-space: nowrap">
                 <td>€&nbsp;@product.Price.ToString("N2").Replace(",00", ",-")</td>
                 </span>
-                <td><button class="btn-primary">Bekijk het item =></button></td>
+                <td><button class="btn btn-secondary">Bekijk het item</button></td>
             </tr>
             }
         </tbody>
