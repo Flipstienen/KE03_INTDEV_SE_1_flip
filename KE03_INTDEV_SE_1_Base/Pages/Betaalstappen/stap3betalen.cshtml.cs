@@ -13,7 +13,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
         public IOrderRepository _orderRepository { get; set; }
         public ICustomerRepository _customerRepository { get; set; }
         public IProductRepository _productRepository { get; set; }
-        public decimal totale_prijs { get; set; } = 0;
+        private decimal totale_prijs_decimal { get; set; } = 0;
+        public string totale_prijs { get; set; } = "0";
         public string naam { get; set; }
         public List<gebruikergegevens> gebruiker { get; set; } = new List<gebruikergegevens>();
 
@@ -34,11 +35,11 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
             string levering = HttpContext.Session.GetString("levering");
             if (levering == "thuis")
             {
-                totale_prijs += 5;
+                totale_prijs_decimal += 5;
             }
             else
             {
-                totale_prijs += 0;
+                totale_prijs_decimal += 0;
             }
             totale_prijs.ToString().Replace(",0", "-");
         }
@@ -56,6 +57,18 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
                 }
             }
             _orderRepository.AddOrder(DateTime.Now, _customerRepository.GetCustomerByName(naam).Id);
+
+            var order = _orderRepository.GetOrderLastOrder();
+
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart");
+            foreach (var item in cart)
+            {
+                var product = _productRepository.GetProductById(item.productId);
+                if (product != null)
+                {
+                    order.Products
+                }
+            }
 
             HttpContext.Session.Clear();
             return RedirectToPage("/Index");
