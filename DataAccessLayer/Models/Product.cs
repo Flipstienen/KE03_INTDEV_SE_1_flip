@@ -22,7 +22,7 @@ namespace DataAccessLayer.Models
 
         public byte[] Image { get; set; }
 
-        public ICollection<Order> Orders { get; } = new List<Order>();
+        public ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 
         public ICollection<Part> Parts { get; } = new List<Part>();
 

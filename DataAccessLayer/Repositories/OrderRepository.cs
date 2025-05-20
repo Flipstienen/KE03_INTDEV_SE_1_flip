@@ -48,7 +48,12 @@ namespace DataAccessLayer.Repositories
  
         public IEnumerable<Order> GetAllOrders()
         {
-            return _context.Orders.Include(o => o.Customer).Include(o => o.Products).ThenInclude(p => p.Parts);
+            return _context.Orders.Include(o => o.Customer).Include(o => o.OrderProducts).ThenInclude(op => op.Product).ThenInclude(p => p.Parts);
+        }
+
+        public IEnumerable<Order> GetAllOrdersSortedByDone()
+        {
+            return _context.Orders.Include(o => o.Customer).Include(o => o.OrderProducts).ThenInclude(op => op.Product).ThenInclude(p => p.Parts).OrderByDescending(o => o.Isdelivered);
         }
 
         public Order? GetOrderById(int id)

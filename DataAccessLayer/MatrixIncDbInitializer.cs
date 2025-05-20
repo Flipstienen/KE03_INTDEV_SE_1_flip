@@ -31,10 +31,10 @@ namespace DataAccessLayer
 
             var orders = new Order[]
             {
-                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-01-01")},
-                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-02-01")},
-                new Order { Customer = customers[1], OrderDate = DateTime.Parse("2021-02-01")},
-                new Order { Customer = customers[2], OrderDate = DateTime.Parse("2021-03-01")}
+                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-01-01"),Isdelivered=true},
+                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-02-01"),Isdelivered=false},
+                new Order { Customer = customers[1], OrderDate = DateTime.Parse("2021-02-01"),Isdelivered=false},
+                new Order { Customer = customers[2], OrderDate = DateTime.Parse("2021-03-01"),Isdelivered=true}
             };  
             context.Orders.AddRange(orders);
 
@@ -56,11 +56,15 @@ namespace DataAccessLayer
             };
             context.Parts.AddRange(parts);
 
-            orders[0].Products.Add(products[2]);
-            orders[1].Products.Add(products[2]);
-            orders[2].Products.Add(products[0]);
-            orders[3].Products.Add(products[1]);
-            orders[0].Products.Add(products[1]);
+            var orderProduct = new OrderProduct[] {
+                new OrderProduct { Order = orders[0], Product = products[0], Amount = 1 },
+                new OrderProduct { Order = orders[0], Product = products[1], Amount = 2 },
+                new OrderProduct { Order = orders[1], Product = products[2], Amount = 1 },
+                new OrderProduct { Order = orders[2], Product = products[0], Amount = 3 },
+                new OrderProduct { Order = orders[3], Product = products[1], Amount = 4 }
+            };
+            context.AddRange(orderProduct);
+
             products[0].Parts.Add(parts[0]);
             products[1].Parts.Add(parts[2]);
             products[1].Parts.Add(parts[3]);

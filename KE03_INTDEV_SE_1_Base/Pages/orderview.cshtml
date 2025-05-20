@@ -13,6 +13,8 @@
 			<th>bestel datum</th>
 			<th>klant Name</th>
 			<th>bestelde producten</th>
+			<th>hoeveelheid</th>
+			<th>is bezorgd</th>
 		</tr>
 </thead>
 	@foreach (var order in Model.Orders)
@@ -22,12 +24,21 @@
 			<td>@Html.DisplayName(order.OrderDate.ToString())</td>
 			<td>@Html.DisplayName(order.Customer.Name.ToString())</td>
 			<td>
-				@foreach (var product in order.Products)
+				@foreach (var orderProduct in order.OrderProducts)
 				{
-					@Html.DisplayName(product.Name.ToString())
+					@Html.DisplayName(orderProduct.Product.Name)
 					<br />
 				}
-				
+			</td>
+			<td>
+				@foreach (var orderProduct in order.OrderProducts)
+				{
+					@Html.DisplayName(orderProduct.Amount.ToString())
+					<br />
+				}
+			</td>
+			<td>
+				@order.Isdelivered.ToString()
 			</td>
 		</tr>
 	}

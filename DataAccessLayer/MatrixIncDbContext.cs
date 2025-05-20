@@ -21,14 +21,20 @@ namespace DataAccessLayer
                 .WithOne(o => o.Customer)
                 .HasForeignKey(o => o.CustomerId).IsRequired();
 
-            modelBuilder.Entity<Order>()
-                .HasMany(o => o.Products)
-                .WithMany(p => p.Orders)
-                .UsingEntity(j => j.ToTable("OrderProduct"));
+            modelBuilder.Entity<OrderProduct>()
+            .HasKey(op => new { op.OrderId, op.ProductId });
 
-            modelBuilder.Entity<Product>()
-                .HasMany(p => p.Orders)
-                .WithMany(o => o.Products);
+            modelBuilder.Entity<OrderProduct>()
+                .HasOne(op => op.Order)
+                .WithMany(o => o.OrderProducts)
+                .HasForeignKey(op => op.OrderId);
+
+            modelBuilder.Entity<OrderProduct>()
+                .HasOne(op => op.Product)
+                .WithMany(p => p.OrderProducts)
+                .HasForeignKey(op => op.ProductId);
+
+            modelBuilder.Entity<Product>();
 
             modelBuilder.Entity<Part>()
                 .HasMany(p => p.Products)

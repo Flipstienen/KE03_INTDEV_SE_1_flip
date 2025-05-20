@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using DataAccessLayer.Models;
 using KE03_INTDEV_SE_1_Base.Pages.helpers;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         public void OnGet()
         {
             Console.WriteLine(HttpContext.Session.GetString("cart"));
-            
+
             products = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart") ?? new List<CartItem>();
 
             foreach (var product in products)
@@ -69,8 +70,22 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             HttpContext.Session.SetObjectAsJson("cart", cart);
             return RedirectToPage();
+
+        }
+        public IActionResult OnPostChangeAmount(int amount, string productName)
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart") ?? new List<CartItem>();
+            var item = cart.FirstOrDefault(i => i.productName == productName);
+            if (item != null)
+            {
+                item.quantity = amount;
+                if (item.quantity <= 0)
+                    cart.Remove(item);
+            }
+            HttpContext.Session.SetObjectAsJson("cart", cart);
+            return RedirectToPage();
+
         }
     }
-
 }
 

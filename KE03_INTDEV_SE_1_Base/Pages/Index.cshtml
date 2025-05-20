@@ -3,22 +3,10 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Klant</th>
-            <th>Aantal Orders</th>
-            <th> is hij nog actief</th>
-        </tr>
-    </thead>
-    @foreach (var c in Model.Customers)
-    {        
-        <tr>
-            <td>@Html.DisplayName(c.Name)</td>
-            <td>@Html.DisplayName(c.Orders.Count.ToString())</td>        
-            <td>@Html.DisplayName(c.Active.ToString())</td>
-        </tr>
-    }
-</table>
-
+<div style="text-align: center">
+    <h1 style="font-family: 'Bell MT'; font-size:125px">MATRIX INC</h1>
+    <div>
+        <button class="btn bg-secondary text-white mb-3 me-3" style="width: 400px; padding: 3rem 4rem" onclick="window.location.href='/filter'">Alle producten</button>
+        <button class="btn bg-secondary text-white mb-3 me-3" style="width: 400px; padding: 3rem 4rem" onclick="window.location.href='/about'">About</button>
+    </div>
+</div>

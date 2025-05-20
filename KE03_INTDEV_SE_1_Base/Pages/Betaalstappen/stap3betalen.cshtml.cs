@@ -60,7 +60,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
             var nieuwe_order = new Order
             {
                 OrderDate = DateTime.Now,
-                CustomerId = customer.Id
+                CustomerId = customer.Id,
+                Isdelivered = false,
             };
 
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart");
@@ -69,7 +70,12 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
                 var product = _productRepository.GetProductById(item.productId);
                 if (product != null)
                 {
-                    nieuwe_order.Products.Add(product);
+                    nieuwe_order.OrderProducts.Add(new OrderProduct
+                    {
+                        ProductId = product.Id,
+                        Order = nieuwe_order,
+                        Amount = item.quantity,
+                    });
                 }
             }
 

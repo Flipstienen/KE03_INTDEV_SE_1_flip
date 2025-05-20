@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace KE03_INTDEV_SE_1_Base.Pages
 {
-    public class ProductenModel : PageModel
+    public class NotFoundModel : PageModel
     {
         private readonly IProductRepository _productRepository;
 
@@ -14,7 +14,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
         public string imgSrc { get; set; }
         public string filter { get; set; }
-        public ProductenModel(IProductRepository productRepository)
+        public NotFoundModel(IProductRepository productRepository)
         {
             _productRepository = productRepository;
             Products = new List<Product>();
@@ -26,13 +26,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             Filters.Add("geen filters");
             filter = selectedFilter;
 
-            if (!Filters.Contains(selectedFilter))
-            {
-                filter = "NotFound";
-                return RedirectToPage("/NotFound");
-            }
-
-            else if (selectedFilter == "geen filters")
+            if (selectedFilter == "geen filters")
             {
                 Products = _productRepository.GetAllProducts().ToList();
             }

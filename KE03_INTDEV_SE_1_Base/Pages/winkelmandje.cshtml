@@ -31,7 +31,11 @@
             <input type="hidden" name="productName" value="@item.productName" />
             <button type="submit">-</button>
           </form>
-          @item.quantity
+          <form method="post" asp-page-handler="ChangeAmount" style="display:inline;">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="productName" value="@item.productName" />
+            <input type="number" name="amount" value="@item.quantity" min="1" onblur="this.form.submit()" />
+          </form>
           <form method="post" asp-page-handler="Increase" style="display:inline;">
             @Html.AntiForgeryToken()
             <input type="hidden" name="productName" value="@item.productName" />
@@ -55,8 +59,13 @@
 		<p>@ViewData["Message"]</p>
 	</div>
 }
-<h4>@Model.totalPrice</h4>
-<h4><button onclick="window.location.href='/filter'">naar winkelen</button><button id="afrekenen" style="display: none" onclick="window.location.href = '/betaalstappen/stap1gegevens'" class="btn btn-primary"> afrekenen</button></h4>
+<h4 id="bedrag" style="display: none; margin-left: auto; width: fit-content;" >@Model.totalPrice.ToString().Replace("0,0",",-")</h4>
+<h4>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <button class="btn btn-primary" onclick="window.location.href='/filter'">naar winkelen</button>
+        <button id="afrekenen" style="display: none" onclick="window.location.href = '/betaalstappen/stap1gegevens'" class="btn btn-primary"> afrekenen</button>
+    </di>
+</h4>
 
 <script>
     window.onload = function()
@@ -68,6 +77,7 @@
         else {
             document.getElementById("afrekenen").style.display = "block";
             document.getElementById("producten").style.display = "block";
+            document.getElementById("bedrag").style.display = "block";
         }
     }
 </script>
