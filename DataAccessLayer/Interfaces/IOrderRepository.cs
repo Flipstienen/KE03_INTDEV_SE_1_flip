@@ -11,7 +11,7 @@ namespace DataAccessLayer.Interfaces
     {
         public IEnumerable<Order> GetAllOrders();
 
-        public IEnumerable<Order> GetOrderLastOrder();
+        public IEnumerable<Order> GetOrderbyLastOrder();
         public void AddOrder(DateTime date, int customerId);
         public Order? GetOrderById(int id);
 

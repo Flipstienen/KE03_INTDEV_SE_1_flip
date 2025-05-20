@@ -45,9 +45,7 @@ namespace DataAccessLayer.Repositories
         {
             return _context.Orders.OrderByDescending(o => o.OrderDate).Take(1);
         }
-        {
-           
-        }
+ 
         public IEnumerable<Order> GetAllOrders()
         {
             return _context.Orders.Include(o => o.Customer).Include(o => o.Products).ThenInclude(p => p.Parts);

@@ -16,5 +16,8 @@ namespace DataAccessLayer.Models
             this.naam = naam;
             this.adres = adres;
         }
+        public gebruikergegevens()
+        {
+        }
     }
 }

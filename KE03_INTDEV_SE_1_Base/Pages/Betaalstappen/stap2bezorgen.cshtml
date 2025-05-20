@@ -7,7 +7,7 @@
 <div>
     <h1>@ViewData["Title"]</h1>
     <h2>Stap 2: Kies een bezorgoptie</h2>
-    <form id="myFrom" method="post" asp-page-handler="Bestel">
+    <form id="myForm" method="post" asp-page-handler="Bestel">
         <div class="circle-choice-group">
             <label class="circle-option">
                 <input type="radio" name="bezorgoptie" value="thuis" />
@@ -23,3 +23,7 @@
         <h3> <button type="submit" class="btn btn-primary btn-lg float-end">betaal</button></h3>
     </form>
 </div>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="text-danger">Maak een keuze voor levering.</div>
+}

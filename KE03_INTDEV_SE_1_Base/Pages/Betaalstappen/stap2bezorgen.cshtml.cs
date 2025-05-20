@@ -24,17 +24,14 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             customer = _customerRepository.GetAllCustomers().ToList();
         }
 
-        public IActionResult OnPostBestel(string value)
+        public IActionResult OnPostBestel(string bezorgoptie)
         {
-            if (value == "thuis")
+            if (string.IsNullOrEmpty(bezorgoptie))
             {
-                HttpContext.Session.SetString("levering", "thuis");
+                ModelState.AddModelError(string.Empty, "Selecteer een bezorgmethode.");
+                return Page();
             }
-            else
-            {
-                HttpContext.Session.SetString("levering", "afhaalpunt");
-            }
-
+            HttpContext.Session.SetString("levering", bezorgoptie);
             return Redirect("stap3betalen");
         }
     }

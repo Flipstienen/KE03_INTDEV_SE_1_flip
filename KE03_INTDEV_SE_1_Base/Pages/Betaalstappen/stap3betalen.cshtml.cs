@@ -5,6 +5,7 @@ using DataAccessLayer.Models;
 using System.Security.Cryptography.X509Certificates;
 using DataAccessLayer.Interfaces;
 using System.Runtime.Loader;
+using System.Text.Json;
 
 namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
 {
@@ -14,9 +15,9 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
         public ICustomerRepository _customerRepository { get; set; }
         public IProductRepository _productRepository { get; set; }
         private decimal totale_prijs_decimal { get; set; } = 0;
-        public string totale_prijs { get; set; } = "0";
+        public string totale_prijs { get; set; }
         public string naam { get; set; }
-        public List<gebruikergegevens> gebruiker { get; set; } = new List<gebruikergegevens>();
+        public gebruikergegevens gebruiker { get; set; } = new gebruikergegevens();
 
         public stap3betalenModel(IOrderRepository orderRepository, ICustomerRepository customerRepository, IProductRepository productRepository)
         {
@@ -29,36 +30,38 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart");
             foreach(var item in cart)
             {
-                totale_prijs += item.price * item.quantity;
+                totale_prijs_decimal += item.price * item.quantity;
             }
 
             string levering = HttpContext.Session.GetString("levering");
+
             if (levering == "thuis")
             {
                 totale_prijs_decimal += 5;
             }
-            else
-            {
-                totale_prijs_decimal += 0;
-            }
-            totale_prijs.ToString().Replace(",0", "-");
+            totale_prijs = totale_prijs_decimal.ToString("0.00").Replace(",00",",-");
         }
 
         public IActionResult OnPostBetaald()
         {
-            gebruiker = HttpContext.Session.GetObjectFromJson<List<gebruikergegevens>>("gebruiker");
+            gebruiker = HttpContext.Session.GetObjectFromJson<gebruikergegevens>("gebruiker");
 
-            foreach (var item in gebruiker)
-            {
-                naam = item.naam;
-                if (_customerRepository.GetCustomerByName(item.naam) == null)
+
+
+                naam = gebruiker.naam;
+                if (_customerRepository.GetCustomerByName(gebruiker.naam) == null)
                 {
-                    _customerRepository.AddCustomer(new Customer(item.naam, item.adres, true));
+                    _customerRepository.AddCustomer(new Customer(gebruiker.naam, gebruiker.adres, true));
                 }
-            }
-            _orderRepository.AddOrder(DateTime.Now, _customerRepository.GetCustomerByName(naam).Id);
+                    
 
-            var order = _orderRepository.GetOrderLastOrder();
+            var customer = _customerRepository.GetCustomerByName(naam);
+
+            var nieuwe_order = new Order
+            {
+                OrderDate = DateTime.Now,
+                CustomerId = customer.Id
+            };
 
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart");
             foreach (var item in cart)
@@ -66,12 +69,14 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
                 var product = _productRepository.GetProductById(item.productId);
                 if (product != null)
                 {
-                    order.Products
+                    nieuwe_order.Products.Add(product);
                 }
             }
 
+            _orderRepository.AddOrder(nieuwe_order);
             HttpContext.Session.Clear();
-            return RedirectToPage("/Index");
+            Console.WriteLine("Bestelling is geplaatst");
+            return Redirect("~/index");
         }
     }
 }
