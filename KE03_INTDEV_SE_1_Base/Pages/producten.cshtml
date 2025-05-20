@@ -1,13 +1,22 @@
 ﻿@page
 @model productenModel
 @{
-    ViewData["Title"] = "Alle producten";
+    if (Model.filter != "geen filters")
+    {
+        ViewData["Title"] = "Alle " + Model.filter;
+    }
+
+
+    else
+    {
+        ViewData["Title"] = "Alle producten";
+    }
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<button class="btn btn-primary" onclick="ToggleFilters()">Filters =></button>
-<div id="filters" hidden="hidden"> 
+<button class="btn btn-primary" onclick="ToggleFilters()">Filters</button>
+<div id="filters" style="display: none"> 
     <h5>Filters</h5>
     <table>
         <tbody>
@@ -54,12 +63,18 @@
 </div>
 
 <script>
-    function ToggleFilters(){
+    function ToggleFilters()
+    {
 		container = document.getElementById("filters");
-		if (container.hidden) {
-			container.hidden = false;
-		} else {
-			container.hidden = true;
+		if (container.style.display == "none") 
+        {
+			container.style.display = "block";
+		} 
+        
+        else 
+        {
+			container.style.display = "none";
 		}
 	}
+
 </script>

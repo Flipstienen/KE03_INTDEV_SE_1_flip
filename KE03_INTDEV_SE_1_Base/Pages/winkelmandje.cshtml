@@ -10,7 +10,7 @@
 <div>
 	<p>Hieronder staan de producten in uw winkelmandje:</p
 </div>
-<table>
+<table id="producten" style="display: none">
   <thead>
     <tr>
       <th>Product</th>
@@ -56,34 +56,18 @@
 	</div>
 }
 
-<button onclick="CartCheck()"> afrekenen</button>
+<h4><button onclick="window.location.href='/filter'">naar winkelen</button><button id="afrekenen" style="display: none" onclick="window.location.href = '/betaalstappen/stap1gegevens'" class="btn btn-primary"> afrekenen</button></h4>
 
 <script>
-    function CartCheck(){
+    window.onload = function()
+    {
         cart = @Html.Raw(Json.Serialize(Model.products))
         if (cart.length == 0)
         {
-            var feedback = document.createElement("div");
-            feedback.innerHTML = "Je winkelmandje is leeg, voeg eerst een product toe!";
-            feedback.style.position = "fixed";
-            feedback.style.top = "10px";
-            feedback.style.right = "10px";
-            feedback.style.backgroundColor = "#dc3545";
-            feedback.style.color = "white";
-            feedback.style.padding = "10px";
-            feedback.style.borderRadius = "5px";
-            feedback.style.zIndex = "1000";
-            document.body.appendChild(feedback);
-
-            setTimeout(function () {
-                if (document.body.contains(feedback)) 
-                {
-                    document.body.removeChild(feedback);
-                }
-            }, 1500);
-        } 
+        }
         else {
-            window.location.href = "/betaalstappen/stap1gegevens";
+            document.getElementById("afrekenen").style.display = "block";
+            document.getElementById("producten").style.display = "block";
         }
     }
 </script>

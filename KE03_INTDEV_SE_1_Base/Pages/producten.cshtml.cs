@@ -13,6 +13,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         public List<string> Filters { get; set; }
 
         public string imgSrc { get; set; }
+        public string filter { get; set; }
         public productenModel(IProductRepository productRepository)
         {
             _productRepository = productRepository;
@@ -21,6 +22,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         }
         public void OnGet(string selectedFilter)
         {
+            filter = selectedFilter;
             Filters = _productRepository.GetAllCharasteristics().ToList();
             Filters.Add("geen filters");
             Products = _productRepository.GetAllProducts().Where(p => p.characteristic == selectedFilter).ToList();

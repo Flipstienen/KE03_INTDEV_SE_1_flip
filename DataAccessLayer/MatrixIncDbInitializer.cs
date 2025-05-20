@@ -43,7 +43,7 @@ namespace DataAccessLayer
 
                 new Product { Name = "Nebuchadnezzar", Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen", Price = 10000.00m, characteristic = "Voertuigen", Image = System.IO.File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), @"..\", "DataAccessLayer", "Images_For_Database", "Hoverbike.jpg")) },
                 new Product { Name = "Jack-in Chair", Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort", Price = 500.50m, characteristic="Zettels", Image = System.IO.File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), @"..\", "DataAccessLayer", "Images_For_Database", "jack-in chair.jpeg")) },
-                new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m, characteristic="Bom", Image= System.IO.File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), @"..\", "DataAccessLayer", "Images_For_Database", "emp.jpeg")) }
+                new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m, characteristic="Bommen", Image= System.IO.File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), @"..\", "DataAccessLayer", "Images_For_Database", "emp.jpeg")) }
             };
             context.Products.AddRange(products);
 
