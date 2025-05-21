@@ -24,7 +24,7 @@
     {
       <tr>
         <td>@item.productName</td>
-        <td>€&nbsp @item.price.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00",",-")</td>
+        <td>€ @item.price.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00",",-")/perstuk</td>
         <td>
           <form method="post" asp-page-handler="Decrease" style="display:inline;">
             @Html.AntiForgeryToken()
@@ -59,7 +59,7 @@
 		<p>@ViewData["Message"]</p>
 	</div>
 }
-<h4 id="bedrag" style="display: none; margin-left: auto; width: fit-content;" >€&nbsp @Model.totalPrice.ToString("N2").Replace(",00", ",-")</h4>
+<h4 id="bedrag" style="display: none; margin-left: auto; width: fit-content;" >Totaal: € @Model.totalPrice.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00", ",-")</h4>
 <h4>
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <button class="btn btn-secondary" onclick="window.location.href='/filter'">naar winkelen</button>

@@ -69,8 +69,9 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
         function searchProducts() {
-            var filterValue = document.getElementById("searchInput").value;
+            let filterValue = document.getElementById("searchInput").value;
             if (filterValue) {
+				filterValue = filterValue.charAt(0).toUpperCase() + filterValue.slice(1);
                 window.location.href = "/producten?selectedFilter=" + encodeURIComponent(filterValue);
             }
         }

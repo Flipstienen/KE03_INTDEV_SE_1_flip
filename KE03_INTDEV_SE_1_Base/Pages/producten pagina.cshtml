@@ -10,7 +10,7 @@
         <img class="img-fluid" src="@Model.imgSrc" alt="afbeelding van @ViewData["Title"]" />
 	</div>
         <div class="col-lg-6">
-        <h2>€&nbsp @Model.Product.Price.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00", ",-")</h2>
+        <h2>€ @Model.Product.Price.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00", ",-")/perstuk</h2>
         <form method="post" asp-page-handler="AddToCart">
             @Html.AntiForgeryToken()
             <input type="hidden" name="productId" value="@Model.Product.Id" />
