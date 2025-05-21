@@ -24,7 +24,7 @@
     {
       <tr>
         <td>@item.productName</td>
-        <td>@item.price.ToString("C").Replace(",00",",-")</td>
+        <td>€&nbsp @item.price.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00",",-")</td>
         <td>
           <form method="post" asp-page-handler="Decrease" style="display:inline;">
             @Html.AntiForgeryToken()

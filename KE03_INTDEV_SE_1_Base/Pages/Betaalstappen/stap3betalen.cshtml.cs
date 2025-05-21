@@ -41,7 +41,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
             {
                 totale_prijs_decimal += 5;
             }
-            totale_prijs = totale_prijs_decimal.ToString("N2").Replace(",00",",-");
+            totale_prijs = totale_prijs_decimal.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00",",-");
         }
 
         public IActionResult OnPostBetaald()
