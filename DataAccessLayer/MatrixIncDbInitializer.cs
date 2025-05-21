@@ -1,9 +1,4 @@
 ﻿using DataAccessLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
@@ -35,7 +30,7 @@ namespace DataAccessLayer
                 new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-02-01"),Isdelivered=false},
                 new Order { Customer = customers[1], OrderDate = DateTime.Parse("2021-02-01"),Isdelivered=false},
                 new Order { Customer = customers[2], OrderDate = DateTime.Parse("2021-03-01"),Isdelivered=true}
-            };  
+            };
             context.Orders.AddRange(orders);
 
             var products = new Product[]

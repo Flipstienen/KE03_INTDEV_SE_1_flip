@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataAccessLayer.Models
+﻿namespace DataAccessLayer.Models
 {
     public class Product
-    {        
+    {
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -17,7 +9,7 @@ namespace DataAccessLayer.Models
         public string Description { get; set; }
 
         public decimal Price { get; set; }
-        
+
         public string characteristic { get; set; }
 
         public byte[] Image { get; set; }

@@ -1,11 +1,8 @@
+using DataAccessLayer.Interfaces;
+using DataAccessLayer.Models;
 using KE03_INTDEV_SE_1_Base.Pages.helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using DataAccessLayer.Models;
-using System.Security.Cryptography.X509Certificates;
-using DataAccessLayer.Interfaces;
-using System.Runtime.Loader;
-using System.Text.Json;
 
 namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
 {
@@ -20,6 +17,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
         public gebruikergegevens gebruiker { get; set; } = new gebruikergegevens();
         public int huidigeStap { get; set; } = 3;
 
+        public bool isDelivered { get; set; }
+
         public stap3betalenModel(IOrderRepository orderRepository, ICustomerRepository customerRepository, IProductRepository productRepository)
         {
             _orderRepository = orderRepository;
@@ -29,8 +28,9 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
         public void OnGet()
         {
 
+
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart");
-            foreach(var item in cart)
+            foreach (var item in cart)
             {
                 totale_prijs_decimal += item.price * item.quantity;
             }
@@ -41,21 +41,29 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
             {
                 totale_prijs_decimal += 5;
             }
-            totale_prijs = totale_prijs_decimal.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00",",-");
+
+            totale_prijs = totale_prijs_decimal.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00", ",-");
         }
 
         public IActionResult OnPostBetaald()
         {
+            string levering = HttpContext.Session.GetString("levering") ?? "afhalen";
+            if (levering == "thuis")
+            {
+                isDelivered = true;
+            }
+            else
+            {
+                isDelivered = false;
+            }
             gebruiker = HttpContext.Session.GetObjectFromJson<gebruikergegevens>("gebruiker");
 
+            naam = gebruiker.naam;
+            if (_customerRepository.GetCustomerByName(gebruiker.naam) == null)
+            {
+                _customerRepository.AddCustomer(new Customer(gebruiker.naam, gebruiker.adres, true));
+            }
 
-
-                naam = gebruiker.naam;
-                if (_customerRepository.GetCustomerByName(gebruiker.naam) == null)
-                {
-                    _customerRepository.AddCustomer(new Customer(gebruiker.naam, gebruiker.adres, true));
-                }
-                    
 
             var customer = _customerRepository.GetCustomerByName(naam);
 
@@ -63,7 +71,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
             {
                 OrderDate = DateTime.Now,
                 CustomerId = customer.Id,
-                Isdelivered = false,
+                Isdelivered = isDelivered,
             };
 
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart");

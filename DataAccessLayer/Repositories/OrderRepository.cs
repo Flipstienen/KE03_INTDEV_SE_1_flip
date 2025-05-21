@@ -24,12 +24,13 @@ namespace DataAccessLayer.Repositories
             _context.SaveChanges();
         }
 
-        public void AddOrder(DateTime date, int customerId)
+        public void AddOrder(DateTime date, int customerId, bool isDelivered)
         {
             Order order = new Order
             {
                 OrderDate = date,
-                CustomerId = customerId
+                CustomerId = customerId,
+                Isdelivered = isDelivered
             };
             _context.Orders.Add(order);
             _context.SaveChanges();

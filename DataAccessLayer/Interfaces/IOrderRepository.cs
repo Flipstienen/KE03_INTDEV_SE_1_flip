@@ -1,9 +1,4 @@
 ﻿using DataAccessLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
@@ -15,7 +10,7 @@ namespace DataAccessLayer.Interfaces
 
         public IEnumerable<Order> GetAllOrdersSortedByDone();
 
-        public void AddOrder(DateTime date, int customerId);
+        public void AddOrder(DateTime date, int customerId, bool isDelivered);
         public Order? GetOrderById(int id);
 
         public void AddOrder(Order order);
