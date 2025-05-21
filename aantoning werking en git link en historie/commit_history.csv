@@ -1,0 +1,19 @@
+86ff08a7c6528f204460b3e8ad9c99df8b6e86d3,Flipstienen,flipstienen1@gmail.com,2025-05-21,directe levering is daadwerkelijk direct
+ecda8fc036c1865fa6f6bfcbd4ac454703a4563b,Flipstienen,flipstienen1@gmail.com,2025-05-21,zoeken
+b235df88d0caa9ea722172cdf04114c8a01731a6,Flipstienen,flipstienen1@gmail.com,2025-05-21,Nederlands cijfer systeem
+a9ac76ecfcbc38c8adfa80454b5013820b12ca1b,Flipstienen,flipstienen1@gmail.com,2025-05-21,beter winkelmandje
+c9e62043e48eec1575eecdf99913ff000f9be8c9,Flipstienen,flipstienen1@gmail.com,2025-05-21,laatste design fixes
+6cb78ca31f6962ff339d85c8da9106395ac9842f,Flipstienen,flipstienen1@gmail.com,2025-05-21,het prototype is af.
+e98bbc7ae2f0dd294b0340f728ac73e54b821b7e,Flipstienen,flipstienen1@gmail.com,2025-05-20,schoonheids aanpassinkjes
+a6d5b36a292cd64a3e81459688b18ec3aed3d695,Flipstienen,flipstienen1@gmail.com,2025-05-20,alle functionaliteit is er.
+2e3296bfbbafb63a4a65711cfae50ad504915d7a,Flipstienen,flipstienen1@gmail.com,2025-05-20,save
+9a8f44517cad19c98e8dcd8f26ee5e794286fce7,Flipstienen,flipstienen1@gmail.com,2025-05-20,quick save
+a6b07f4df313a7f7db036300e4378a10b95acce5,Flipstienen,flipstienen1@gmail.com,2025-05-20,filter wordt weergeven in pagina
+5fd585ff16163880e06405a5d9c0f264af3200a7,Flipstienen,flipstienen1@gmail.com,2025-05-20,afreken knop + check
+5a044c7f3309a65d8e2b93722c566ca5261da4b4,Flipstienen,flipstienen1@gmail.com,2025-05-19,toevoeging van img bij producten en bettere feedback
+3ff1598fac0c7873e414c0aefa3777f465fbfa2c,Flipstienen,flipstienen1@gmail.com,2025-05-19,toevoeging van filter en winkelmandje
+2f2d942bd80f5b1cae9b7d9c4f5a873ae20059dc,Flipstienen,flipstienen1@gmail.com,2025-05-18,dit is een save
+32be311ab0e6b9838b790f497ef584468e8163c6,Flipstienen,flipstienen1@gmail.com,2025-05-18,winkelmandje en begin aan producten lijst.
+9cfe279c717775685561ec19fddbc39122b19ed2,Flipstienen,flipstienen1@gmail.com,2025-05-18,mooie toevoegingen
+5512b2501c09a0548ebf46bc7381390a736b627a,jaspersnhj,nicky.jaspers@hszuyd.nl,2025-04-23,Initial commit KE03_INTDEV_SE_1. Dit is een .net CORE razor pages project inclusief een basis data access layer. We maken gebruik van een lokale sqlite database en Entity Framework als ORM. Deze data access layer bevat een aantal repositories (interfaces). In de index page model hebben we een voorbeeld van het gebruik van het customer repository.
+14b9130280663aa6c0ac00971ed16eb076887337,Nicky Jaspers,nicky_jaspers@hotmail.com,2025-04-23,Initial commit
