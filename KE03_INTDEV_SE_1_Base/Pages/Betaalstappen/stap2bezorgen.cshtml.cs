@@ -13,6 +13,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         ICustomerRepository _customerRepository;
 
         public List<Customer> customer { get; set; }
+        public int huidigeStap { get; set; } = 2;
 
         public Stap2bezorgenModel(ICustomerRepository customerRepository)
         {

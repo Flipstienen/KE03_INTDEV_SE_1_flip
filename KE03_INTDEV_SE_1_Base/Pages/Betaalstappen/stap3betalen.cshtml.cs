@@ -18,6 +18,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
         public string totale_prijs { get; set; }
         public string naam { get; set; }
         public gebruikergegevens gebruiker { get; set; } = new gebruikergegevens();
+        public int huidigeStap { get; set; } = 3;
 
         public stap3betalenModel(IOrderRepository orderRepository, ICustomerRepository customerRepository, IProductRepository productRepository)
         {
@@ -27,6 +28,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
         }
         public void OnGet()
         {
+
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart");
             foreach(var item in cart)
             {
@@ -39,7 +41,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
             {
                 totale_prijs_decimal += 5;
             }
-            totale_prijs = totale_prijs_decimal.ToString("0.00").Replace(",00",",-");
+            totale_prijs = totale_prijs_decimal.ToString("N2").Replace(",00",",-");
         }
 
         public IActionResult OnPostBetaald()

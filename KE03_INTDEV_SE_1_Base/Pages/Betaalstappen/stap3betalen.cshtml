@@ -3,9 +3,17 @@
 @{
     ViewData["Title"] = "Stap 3 Betalen";
 }
+<link rel="stylesheet" href="/css/stappenstyle.css" />
+<div class="stappen-indicator d-flex justify-content-center my-4">
+    <div class="stap @(Model.huidigeStap == 1 ? "actief" : "")">gegevens</div>
+    <div class="lijn"></div>
+    <div class="stap @(Model.huidigeStap == 2 ? "actief" : "")">bezorgoptie</div>
+    <div class="lijn"></div>
+    <div class="stap @(Model.huidigeStap == 3 ? "actief" : "")">betalen</div>
+</div>
 <h1>@ViewData["Title"]</h1>
 
-<h2>Totale prijs: @Model.totale_prijs</h2>
+<h2>Totale prijs: €&nbsp @Model.totale_prijs</h2>
 <form id="myForm" method="post" asp-page-handler="Betaald">
     <button type="submit" class="btn btn-secondary btn-lg float-md-none">Betalen</button>
 </form>

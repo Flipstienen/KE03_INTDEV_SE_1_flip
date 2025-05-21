@@ -59,7 +59,7 @@
 		<p>@ViewData["Message"]</p>
 	</div>
 }
-<h4 id="bedrag" style="display: none; margin-left: auto; width: fit-content;" >@Model.totalPrice.ToString().Replace("0,0",",-")</h4>
+<h4 id="bedrag" style="display: none; margin-left: auto; width: fit-content;" >€&nbsp @Model.totalPrice.ToString("N2").Replace(",00", ",-")</h4>
 <h4>
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <button class="btn btn-secondary" onclick="window.location.href='/filter'">naar winkelen</button>

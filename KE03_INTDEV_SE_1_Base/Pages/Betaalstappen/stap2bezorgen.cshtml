@@ -1,9 +1,16 @@
 ﻿@page
 @model Stap2bezorgenModel
-<link rel="stylesheet" href="~/css/style.css" />
 @{
     ViewData["Title"] = "Stap 2 bezorgoptie";
 }
+<link rel="stylesheet" href="/css/stappenstyle.css" />
+<div class="stappen-indicator d-flex justify-content-center my-4">
+    <div class="stap @(Model.huidigeStap == 1 ? "actief" : "")">gegevens</div>
+    <div class="lijn"></div>
+    <div class="stap @(Model.huidigeStap == 2 ? "actief" : "")">bezorgoptie</div>
+    <div class="lijn"></div>
+    <div class="stap @(Model.huidigeStap == 3 ? "actief" : "")">betalen</div>
+</div>
 <div>
     <h1>@ViewData["Title"]</h1>
     <h2>Stap 2: Kies een bezorgoptie</h2>
@@ -11,13 +18,13 @@
         <div class="circle-choice-group">
             <label class="circle-option">
                 <input type="radio" name="bezorgoptie" value="thuis" />
-                <span>Thuisbezorgen</span>
-                <p>Thuisbezorging = 5,- euro</p>
+                <span>teleportatie</span>
+                <p>Directe teleportatie = €&nbsp 5,-</p>
             </label>
             <label class="circle-option" >
                 <input type="radio" name="bezorgoptie" value="afhalen" />
                 <span>Afhalen</span>
-                <p>Afhalen = 0,- euro</p>
+                <p>Afhalen = €&nbsp 0,-</p>
             </label>
         </div>
         <h3> <button type="submit" class="btn btn-secondary btn-lg float-end">betaal</button></h3>

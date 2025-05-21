@@ -4,17 +4,29 @@
 	ViewData["Title"] = Model.Product.Name.ToString();
 }
 <h1>@ViewData["Title"]</h1>
-<img src="@Model.imgSrc" alt="afbeelding van @ViewData["Title"]" />
 
-<form method="post" asp-page-handler="AddToCart">
-    @Html.AntiForgeryToken()
-    <input type="hidden" name="productId" value="@Model.Product.Id" />
-    
-    <label for="quantity">Aantal:</label>
-    <input type="number" id="quantity" name="quantity" min="1" value="1" required />
+<div class="row align-items-lg-start">
+	<div class="col-lg-6">
+        <img class="img-fluid" src="@Model.imgSrc" alt="afbeelding van @ViewData["Title"]" />
+	</div>
+        <div class="col-lg-6">
+	    <h2>€&nbsp @Model.Product.Price.ToString("N2").Replace(",00", ",-")</h2>
+        <form method="post" asp-page-handler="AddToCart">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="productId" value="@Model.Product.Id" />
+            <div class="mb-3">
+                <label for="quantity">Aantal:</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1" required />
+            </div>
+            <button type="submit" class="btn btn-secondary">Voeg toe aan winkelmandje</button>
+        </form> 
+    </div>
+</div>
 
-    <button type="submit" class="btn btn-secondary">Voeg toe aan winkelmandje</button>
-</form> 
+<div>
+    <h2>beschrijving</h2>
+	<p>@Model.Product.Description</p>
+</div>
 
 @if (Model.showFeedback)
 {

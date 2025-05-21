@@ -12,7 +12,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         ICustomerRepository _customerRepository;
         public bool showfeedback { get; set; } = false;
         public List<Customer> customer { get; set; }
-
+        public int huidigeStap { get; set; } = 1;
         public Stap1gegevensModel(ICustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;

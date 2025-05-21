@@ -1,0 +1,69 @@
+﻿.stappen-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stap {
+    padding: 10px 16px;
+    border-radius: 20px;
+    background-color: #ccc;
+    color: white;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.stap.actief {
+    background-color: #6c757d;
+}
+
+.lijn {
+    width: 40px;
+    height: 4px;
+    background-color: #ccc;
+}
+
+.circle-option {
+    display: inline-block;
+    border: 2px solid #6c757d;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+    background-color: #6c757d;
+    position: relative;
+}
+
+.circle-option input[type="radio"] {
+    display: none;
+}
+
+.circle-option input[type="radio"]:checked + span,
+.circle-option input[type="radio"]:checked ~ p {
+    font-weight: bold;
+    color: #000;
+}
+
+.circle-option:has(input[type="radio"]:checked) {
+    background-color: transparent;
+}
+.circle-option input[type="radio"]:checked + span::before {
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+}
+
+.circle-option:hover {
+    background-color: #6c757d33;
+}
