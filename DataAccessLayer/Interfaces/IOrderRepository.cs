@@ -8,6 +8,9 @@ namespace DataAccessLayer.Interfaces
 
         public IEnumerable<Order> GetOrderbyLastOrder();
 
+
+        public IEnumerable<Order> GetOrdersByOrdered();
+
         public IEnumerable<Order> GetAllOrdersSortedByDone();
 
         public void AddOrder(DateTime date, int customerId, bool isDelivered);

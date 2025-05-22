@@ -27,16 +27,13 @@
                         @*     <a class="nav-link text-white" asp-area="" asp-page="/Privacy"><h5>Privacy</h5></a> *@
                         @* </li> *@
                         <li class="nav-item" >
-                            <a class="nav-link text-white" asp-area="" asp-page="/filter"><h5>Alle Producten</h5></a>
+                            <a class="nav-link text-white" asp-area="" asp-page="/filter"><h5>Categorieën</h5></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-page="/about"><h5>About</h5></a>
                         </li>
                         <li class="nav-item d-flex align-items-center">
                             <input type="text" id="searchInput" class="search-input" onblur="searchProducts()" onkeydown="if(event.key == 'Enter') searchProducts()" placeholder="voer kenmerk in..." />
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/winkelmandje"><i class="bi bi-cart fs-3" style="color: white"></i></a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -46,6 +43,10 @@
                                 <li><a class="dropdown-item text-white" asp-page="/orderview">Bestel Historie</a></li>
                                 <li><a class="dropdown-item text-white" asp-page="/notImplemented">log uit</a></li>
                             </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/winkelmandje"><i class="bi bi-cart fs-3" style="color: white"></i></a>
                         </li>
                     </ul>
                 </div>

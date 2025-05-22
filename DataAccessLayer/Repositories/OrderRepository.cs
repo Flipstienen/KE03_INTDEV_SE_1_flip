@@ -3,6 +3,7 @@ using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,10 @@ namespace DataAccessLayer.Repositories
             _context.SaveChanges();
         }
 
+        public IEnumerable<Order> GetOrdersByOrdered()
+        {
+            return _context.Orders.Include(o => o.OrderProducts);
+        }
         public void AddOrder(DateTime date, int customerId, bool isDelivered)
         {
             Order order = new Order

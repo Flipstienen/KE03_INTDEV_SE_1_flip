@@ -16,7 +16,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <button class="btn btn-secondary" onclick="ToggleFilters()">Filters</button>
-<div id="filters" style="display: none"> 
+<div id="filters" style="display: block"> 
     <table class="table">
         <tbody>
             @foreach (var row in Model.Filters.Select((filter, index) => new { filter, index }).GroupBy(x => x.index/ 8))

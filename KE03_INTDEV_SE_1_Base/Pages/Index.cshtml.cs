@@ -10,15 +10,19 @@ namespace KE03_INTDEV_SE_1_Base.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly ICustomerRepository _customerRepository;
+        private readonly IOrderProductsRepository _orderProductsRepository;
 
 
         public IList<Customer> Customers { get; private set; }
 
-        public IndexModel(ILogger<IndexModel> logger, ICustomerRepository customerRepository, IOrderRepository orderRepository, IProductRepository productRepository, IPartRepository partRepository)
+        public IList<Product> MostSoldProducts { get; private set; }
+        public IndexModel(ILogger<IndexModel> logger, ICustomerRepository customerRepository, IOrderProductsRepository orderProductsRepository)
         {
             _logger = logger;
             _customerRepository = customerRepository;
+            _orderProductsRepository = orderProductsRepository;
             Customers = new List<Customer>();
+            MostSoldProducts = new List<Product>();
         }
 
         public void OnGet()
@@ -29,6 +33,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             Customers = _customerRepository.GetAllCustomers().ToList();
             _logger.LogInformation($"getting all {Customers.Count} customers");
+            MostSoldProducts = _orderProductsRepository.GetAllMostSoldProducts().ToList();
         }
     }
 }
