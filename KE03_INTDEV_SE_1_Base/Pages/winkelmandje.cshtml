@@ -29,7 +29,7 @@
           <form method="post" asp-page-handler="Decrease" style="display:inline;">
             @Html.AntiForgeryToken()
             <input type="hidden" name="productName" value="@item.productName" />
-            <button type="submit">-</button>
+            <button class="btn btn-secondary" type="submit">verminderen</button>
           </form>
           <form method="post" asp-page-handler="ChangeAmount" style="display:inline;">
             @Html.AntiForgeryToken()
@@ -39,14 +39,14 @@
           <form method="post" asp-page-handler="Increase" style="display:inline;">
             @Html.AntiForgeryToken()
             <input type="hidden" name="productName" value="@item.productName" />
-            <button type="submit">+</button>
+            <button class="btn btn-secondary" type="submit">toevoegen</button>
           </form>
         </td>
         <td>
           <form method="post" asp-page-handler="Remove">
             @Html.AntiForgeryToken()
             <input type="hidden" name="productName" value="@item.productName" />
-            <button type="submit">🗑 Remove</button>
+            <button class="btn btn-secondary" type="submit">🗑 verwijderen</button>
           </form>
         </td>
       </tr>
