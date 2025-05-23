@@ -34,7 +34,7 @@
           <form method="post" asp-page-handler="ChangeAmount" style="display:inline;">
             @Html.AntiForgeryToken()
             <input type="hidden" name="productName" value="@item.productName" />
-            <input type="number" name="amount" value="@item.quantity" min="1" onblur="this.form.submit()" />
+            <input type="number" name="amount" value="@item.quantity" min="1" max="99999999" onblur="this.form.submit()" />
           </form>
           <form method="post" asp-page-handler="Increase" style="display:inline;">
             @Html.AntiForgeryToken()
