@@ -14,6 +14,8 @@
 			<th>klant Name</th>
 			<th>bestelde producten</th>
 			<th>hoeveelheid</th>
+			<th>bezorgoptie</th>
+			<th>prijs</th>
 			<th>is bezorgd</th>
 		</tr>
 </thead>
@@ -37,6 +39,11 @@
 					<br />
 				}
 			</td>
+			<td>
+				@order.DeliveryOption.ToString()
+			</td>
+			<td>
+				@order.totalPrice.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00", ",-")
 			<td>
 				@order.Isdelivered.ToString()
 			</td>

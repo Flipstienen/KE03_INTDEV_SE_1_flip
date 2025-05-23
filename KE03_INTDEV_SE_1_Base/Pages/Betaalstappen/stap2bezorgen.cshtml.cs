@@ -13,6 +13,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         ICustomerRepository _customerRepository;
 
         public List<Customer> customer { get; set; }
+        public List<CartItem> cart { get; set; }
+        public decimal totalPrice { get; set; } = 0;
         public int huidigeStap { get; set; } = 2;
 
         public Stap2bezorgenModel(ICustomerRepository customerRepository)
@@ -22,11 +24,18 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         }
         public void OnGet()
         {
+            cart= HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart") ?? new List<CartItem>();
+            foreach (var item in cart)
+            {
+                totalPrice += item.price * item.quantity;
+            }
             customer = _customerRepository.GetAllCustomers().ToList();
         }
 
         public IActionResult OnPostBestel(string bezorgoptie)
         {
+
+
             if (string.IsNullOrEmpty(bezorgoptie))
             {
                 ModelState.AddModelError(string.Empty, "Selecteer een bezorgmethode.");

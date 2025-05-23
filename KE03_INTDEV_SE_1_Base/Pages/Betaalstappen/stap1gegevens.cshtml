@@ -4,6 +4,7 @@
    ViewData["Title"] = "Stap 1 gegevens invoeren";  
 }  
 <link rel="stylesheet" href="/css/stappenstyle.css" />
+
 <div class="stappen-indicator d-flex justify-content-center my-4">
     <div class="stap @(Model.huidigeStap == 1 ? "actief" : "")">gegevens</div>
     <div class="lijn"></div>
@@ -11,7 +12,35 @@
     <div class="lijn"></div>
     <div class="stap @(Model.huidigeStap == 3 ? "actief" : "")">betalen</div>
 </div>
-
+<h1>@ViewData["Title"]</h1>
+<container style="position: relative; margin-right: 10px;">
+    <header>
+        winkelmandje
+    </header>
+    <container>
+        <table class="table">
+           @foreach(var item in Model.cart){
+               <tr>
+                   <td>
+						@item.productName
+                   </td>
+                   <td>
+                        @(item.quantity)x
+                   </td>
+                   <td>
+						@item.price.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00", ",-")/perstuk
+                   </td>
+                   <td>
+                        @((item.price * item.quantity).ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00", ",-"))
+                   </td>
+               </tr>
+           }
+        </table>
+    </container>
+    <footer>
+        <h4 style="text-align: right">@Model.totalPrice.ToString("N2").Replace(",00",",-")</h4>
+    </footer>
+</container>
 <div>  
 <form id="myForm" method="post" asp-page-handler="Autentication">  
    <h3> Naam: <input name="Naam" /> </h3>  

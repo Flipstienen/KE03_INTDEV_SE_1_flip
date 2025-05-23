@@ -25,7 +25,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         }
         public void OnGet()
         {
-            Orders = _orderRepository.GetAllOrdersSortedByDone().ToList();
+            Orders = _orderRepository.GetAllOrders().ToList();
         }
     }
 }

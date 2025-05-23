@@ -13,7 +13,43 @@
 </div>
 <h1>@ViewData["Title"]</h1>
 
-<h2>Totale prijs: € @Model.totale_prijs</h2>
+<container style="position: relative; margin-right: 10px;">
+    <header>
+        winkelmandje
+    </header>
+    <container>
+        <table class="table">
+            @foreach (var item in Model.cart)
+            {
+                <tr>
+                    <td>
+                        @item.productName
+                    </td>
+                    <td>
+                        @(item.quantity)x
+                    </td>
+                    <td>
+                        @item.price.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00", ",-")/perstuk
+                    </td>
+                    <td>
+                        @((item.price * item.quantity).ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00", ",-"))
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    Bezorgkosten
+                </td>
+                <td>leveringssoort: @Model.levering</td>
+                <td></td>
+                <td>@Model.levering_prijs.ToString("N2", new System.Globalization.CultureInfo("nl-NL")).Replace(",00", ",-")</td>
+            </tr>
+        </table>
+    </container>
+    <footer>
+        <h4 style="text-align: right">@Model.totale_prijs</h4>
+    </footer>
+</container>
 <form id="myForm" method="post" asp-page-handler="Betaald">
     <button type="submit" class="btn btn-secondary btn-lg float-md-none">Betalen</button>
 </form>

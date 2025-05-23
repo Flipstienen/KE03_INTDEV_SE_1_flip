@@ -13,6 +13,9 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
         public IProductRepository _productRepository { get; set; }
         private decimal totale_prijs_decimal { get; set; } = 0;
         public string totale_prijs { get; set; }
+        public decimal levering_prijs { get; set; } = 0;
+        public string levering { get; set; }
+        public List<CartItem> cart { get; set; } = new List<CartItem>();
         public string naam { get; set; }
         public gebruikergegevens gebruiker { get; set; } = new gebruikergegevens();
         public int huidigeStap { get; set; } = 3;
@@ -27,18 +30,17 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
         }
         public void OnGet()
         {
-
-
-            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart");
+            cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart");
             foreach (var item in cart)
             {
                 totale_prijs_decimal += item.price * item.quantity;
             }
 
-            string levering = HttpContext.Session.GetString("levering");
+            levering = HttpContext.Session.GetString("levering");
 
-            if (levering == "thuis")
+            if (levering == "instant")
             {
+                levering_prijs = 5;
                 totale_prijs_decimal += 5;
             }
 
@@ -47,9 +49,16 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
 
         public IActionResult OnPostBetaald()
         {
-            string levering = HttpContext.Session.GetString("levering") ?? "afhalen";
-            if (levering == "thuis")
+            cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart");
+            foreach (var item in cart)
             {
+                totale_prijs_decimal += item.price * item.quantity;
+            }
+
+            string levering = HttpContext.Session.GetString("levering");
+            if (levering == "instant")
+            {
+                totale_prijs_decimal += 5;
                 isDelivered = true;
             }
             else
@@ -72,9 +81,11 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Betaalstappen
                 OrderDate = DateTime.Now,
                 CustomerId = customer.Id,
                 Isdelivered = isDelivered,
+                DeliveryOption = levering,
+                totalPrice = totale_prijs_decimal,
             };
 
-            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart");
+            cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart");
             foreach (var item in cart)
             {
                 var product = _productRepository.GetProductById(item.productId);

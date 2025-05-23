@@ -26,10 +26,10 @@ namespace DataAccessLayer
 
             var orders = new Order[]
             {
-                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-01-01"),Isdelivered=true},
-                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-02-01"),Isdelivered=false},
-                new Order { Customer = customers[1], OrderDate = DateTime.Parse("2021-02-01"),Isdelivered=false},
-                new Order { Customer = customers[2], OrderDate = DateTime.Parse("2021-03-01"),Isdelivered=true}
+                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-01-01"),Isdelivered=true, DeliveryOption="instant", totalPrice=11001.00m},
+                new Order { Customer = customers[0], OrderDate = DateTime.Parse("2021-02-01"),Isdelivered=false, DeliveryOption = "afhalen", totalPrice = 129.99m},
+                new Order { Customer = customers[1], OrderDate = DateTime.Parse("2021-02-01"),Isdelivered=false, DeliveryOption = "afhalen", totalPrice = 30000.00m},
+                new Order { Customer = customers[2], OrderDate = DateTime.Parse("2021-03-01"),Isdelivered=true, DeliveryOption = "instant", totalPrice= 2002.00m}
             };
             context.Orders.AddRange(orders);
 
