@@ -11,6 +11,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
     {
         public List<CartItem> products { get; private set; }
         public decimal totalPrice { get; private set; } = 0;
+        public int errorId { get; private set; }
         public void OnGet()
         {
             Console.WriteLine(HttpContext.Session.GetString("cart"));
@@ -34,10 +35,15 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         }
 
 
-        public IActionResult OnPostIncrease(string productName)
+        public IActionResult OnPostIncrease(int amount, string productName)
         {
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart") ?? new List<CartItem>();
             var item = cart.FirstOrDefault(i => i.productName == productName);
+            if (amount >= 99999999)
+            {
+                errorId = item.productId;
+                return RedirectToPage();
+            }
             if (item != null)
             {
                 item.quantity++;
@@ -63,6 +69,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
         public IActionResult OnPostRemove(string productName)
         {
+
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart") ?? new List<CartItem>();
             var item = cart.FirstOrDefault(i => i.productName == productName);
             if (item != null)
@@ -76,6 +83,11 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         {
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("cart") ?? new List<CartItem>();
             var item = cart.FirstOrDefault(i => i.productName == productName);
+            if (amount > 99999999)
+            {
+                errorId = item.productId;
+                return RedirectToPage();
+            }
             if (item != null)
             {
                 item.quantity = amount;

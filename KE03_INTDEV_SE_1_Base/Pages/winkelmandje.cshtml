@@ -15,7 +15,7 @@
     <tr>
       <th>Product</th>
       <th>Prijs</th>
-      <th>Aantal</th>
+      <th style="text-align: center">Aantal</th>
       <th>Acties</th>
     </tr>
   </thead>
@@ -39,6 +39,7 @@
           <form method="post" asp-page-handler="Increase" style="display:inline;">
             @Html.AntiForgeryToken()
             <input type="hidden" name="productName" value="@item.productName" />
+            <input type="hidden" name="amount" value="@item.quantity" />
             <button class="btn btn-secondary" type="submit">toevoegen</button>
           </form>
         </td>
@@ -48,6 +49,9 @@
             <input type="hidden" name="productName" value="@item.productName" />
             <button class="btn btn-secondary" type="submit">🗑 verwijderen</button>
           </form>
+        </td>
+        <td>
+            <h4 style="display: none" id="@item.productId">Je kan niet meer toevoegen.</h4>
         </td>
       </tr>
     }
@@ -68,6 +72,7 @@
 </h4>
 
 <script>
+
     window.onload = function()
     {
         cart = @Html.Raw(Json.Serialize(Model.products))
